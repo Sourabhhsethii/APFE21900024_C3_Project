@@ -6,15 +6,18 @@ public class RestaurantService {
     private static List<Restaurant> restaurants = new ArrayList<>();
 
     public Restaurant findRestaurantByName(String restaurantName) throws restaurantNotFoundException {
+        boolean found = false;
 
-        for (int i=0;i<this.restaurants.size();i++){
-            if(this.restaurants.get(i).getName() == restaurantName){
-                return this.restaurants.get(i);
-            } else {
-                throw new restaurantNotFoundException(restaurantName);
+            for (int i=0;i<this.restaurants.size();i++){
+                if(this.restaurants.get(i).getName().equalsIgnoreCase(restaurantName)){
+                    found = true;
+                    return this.restaurants.get(i);
+                }
             }
-        }
-        return null;
+            if(!found){
+                throw  new restaurantNotFoundException(restaurantName);
+            }
+            return null;
     }
 
 

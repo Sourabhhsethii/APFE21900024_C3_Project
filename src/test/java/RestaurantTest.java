@@ -70,13 +70,13 @@ class RestaurantTest {
     public void select_items_and_display_total_order_value(){
 
         // Arrange - Selected Items
-        List<Item> selectedItems = new ArrayList<>();
-        selectedItems.add(restaurant.getItemByName("Sweet corn soup"));
-        selectedItems.add(restaurant.getItemByName("Chill corn soup"));
-        selectedItems.add(restaurant.getItemByName("Pasta lasagne"));
+        ArrayList<String> selectedItemsStringArray =  new ArrayList<>();
+        selectedItemsStringArray.add("Sweet corn soup");
+        selectedItemsStringArray.add("Chill corn soup");
+        selectedItemsStringArray.add("Pasta lasagne");
 
         // Assert
-        assertEquals(537, restaurant.calculateTotalOrderValue(selectedItems) );
+        assertEquals(537, restaurant.calculateTotalOrderValue(selectedItemsStringArray));
     }
 
 }

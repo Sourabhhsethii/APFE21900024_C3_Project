@@ -1,7 +1,10 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Array;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,13 +18,15 @@ class RestaurantTest {
         restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
         restaurant.addToMenu("Sweet corn soup",119);
         restaurant.addToMenu("Vegetable lasagne", 269);
+        restaurant.addToMenu("Chill corn soup",209);
+        restaurant.addToMenu("Pasta lasagne", 209);
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>OPEN/CLOSED<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     //-------FOR THE 2 TESTS BELOW, YOU MAY USE THE CONCEPT OF MOCKING, IF YOU RUN INTO ANY TROUBLE
     @Test
     public void is_restaurant_open_should_return_true_if_time_is_between_opening_and_closing_time(){
-        restaurant = new Restaurant("Wah Ji Wah","Delhi",LocalTime.of(8, 00, 00),LocalTime.of(20, 00, 00));
+        restaurant = new Restaurant("Wah Ji Wah","Delhi",LocalTime.of(8, 00, 00),LocalTime.of(21, 50, 00));
         assertTrue(restaurant.isRestaurantOpen());
     }
 
@@ -58,4 +63,20 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+    //<<<<<<<<<<<<<<<<<<<<<<<Displays the total order value>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void select_items_and_display_total_order_value(){
+
+        // Arrange - Selected Items
+        List<Item> selectedItems = new ArrayList<>();
+        selectedItems.add(restaurant.getItemByName("Sweet corn soup"));
+        selectedItems.add(restaurant.getItemByName("Chill corn soup"));
+        selectedItems.add(restaurant.getItemByName("Pasta lasagne"));
+
+        // Assert
+        assertEquals(537, restaurant.calculateTotalOrderValue(selectedItems) );
+    }
+
 }

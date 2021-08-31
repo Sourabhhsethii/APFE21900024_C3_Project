@@ -41,10 +41,6 @@ public class Restaurant {
         return null;
     }
 
-    public Item getItemByName(String itemName){
-        return findItemByName(itemName);
-    }
-
     public void addToMenu(String name, int price) {
         Item newItem = new Item(name,price);
         menu.add(newItem);

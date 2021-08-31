@@ -41,6 +41,10 @@ public class Restaurant {
         return null;
     }
 
+    public Item getItemByName(String itemName){
+        return findItemByName(itemName);
+    }
+
     public void addToMenu(String name, int price) {
         Item newItem = new Item(name,price);
         menu.add(newItem);
@@ -65,6 +69,20 @@ public class Restaurant {
 
     public String getName() {
         return name;
+    }
+
+
+
+    public int calculateTotalOrderValue(List<String> selectedItems){
+        int total =0;
+        for(String itemName: selectedItems) {
+
+            if(findItemByName(itemName) != null){
+
+                total += findItemByName(itemName).getPrice();
+            }
+        }
+        return total;
     }
 
 }
